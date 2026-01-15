@@ -3,18 +3,7 @@ import { Calendar, ChevronLeft, ChevronRight, Plus, X } from 'lucide-react';
 
 export default function CalendarApp() {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [events, setEvents] = useState({
-    '2026-01-15': [
-      { id: 1, title: 'Team Meeting', color: 'bg-blue-500', textColor: 'text-blue-700', bgColor: 'bg-blue-100' },
-      { id: 2, title: 'Project Deadline', color: 'bg-red-500', textColor: 'text-red-700', bgColor: 'bg-red-100' },
-    ],
-    '2026-01-20': [
-      { id: 3, title: 'Client Call', color: 'bg-green-500', textColor: 'text-green-700', bgColor: 'bg-green-100' },
-    ],
-    '2026-01-25': [
-      { id: 4, title: 'Workshop', color: 'bg-purple-500', textColor: 'text-purple-700', bgColor: 'bg-purple-100' },
-    ],
-  });
+  const [events, setEvents] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
   const [showAddEvent, setShowAddEvent] = useState(false);
   const [newEventTitle, setNewEventTitle] = useState('');
@@ -169,10 +158,10 @@ export default function CalendarApp() {
                     key={index}
                     onClick={() => handleDateClick(day)}
                     className={`
-                      min-h-[100px] p-2 rounded-xl border transition-all duration-200
+                      min-w-[100px] min-h-[90px] p-2 rounded-xl border transition-all duration-200
                       ${day ? 'cursor-pointer hover:bg-white/60 hover:shadow-xl hover:scale-[1.02]' : ''}
                       ${isSelected ? 'bg-white/80 border-purple-400 shadow-xl ring-2 ring-purple-300' : 'bg-white/40 border-white/50 shadow-lg'}
-                      ${isTodayDate ? 'ring-2 ring-purple-500' : ''}
+                      ${isTodayDate ? 'ring-2 ring-purple-500 bg-white/60' : ''}
                     `}
                   >
                     {day && (
@@ -181,7 +170,7 @@ export default function CalendarApp() {
                           {day}
                         </div>
                         <div className="space-y-1">
-                          {dayEvents.slice(0, 2).map(event => (
+                          {dayEvents.slice(0, 1).map(event => (
                             <div
                               key={event.id}
                               className={`text-xs px-2 py-1 rounded ${event.bgColor} ${event.textColor} truncate`}
@@ -189,9 +178,9 @@ export default function CalendarApp() {
                               {event.title}
                             </div>
                           ))}
-                          {dayEvents.length > 2 && (
+                          {dayEvents.length > 1 && (
                             <div className="text-xs text-gray-500 px-2">
-                              +{dayEvents.length - 2} more
+                              +{dayEvents.length - 1} more
                             </div>
                           )}
                         </div>
